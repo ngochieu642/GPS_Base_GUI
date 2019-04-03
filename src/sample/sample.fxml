@@ -18,7 +18,7 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Button layoutX="400.0" layoutY="188.0" mnemonicParsing="false" text="Connect" />
+      <Button layoutX="400.0" layoutY="188.0" mnemonicParsing="false" onAction="#serialConnect" text="Connect" />
       <Label layoutX="76.0" layoutY="104.0" text="IP" />
       <Label layoutX="75.0" layoutY="150.0" text="Port" />
       <TextField fx:id="textFieldPort" layoutX="108.0" layoutY="146.0" />
@@ -34,9 +34,9 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextArea fx:id="msgTCP" layoutX="68.0" layoutY="243.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextArea fx:id="msgSerial" layoutX="330.0" layoutY="243.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="67.0" layoutY="226.0" text="TCP message" />
+      <TextArea fx:id="msgTCP" layoutX="62.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="msgSerial" layoutX="330.0" layoutY="250.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="62.0" layoutY="226.0" text="TCP message" />
       <Label layoutX="330.0" layoutY="226.0" text="Serial message" />
    </children>
 </AnchorPane>

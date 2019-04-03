@@ -13,6 +13,7 @@ import jssc.SerialPortException;
 import jssc.SerialPortList;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -34,6 +35,8 @@ public class Controller implements Initializable {
     @FXML
     public TextArea msgSerial;
 
+    /*Global variable*/
+    SerialPort port = null;
 
 
     @Override
@@ -72,22 +75,38 @@ public class Controller implements Initializable {
                 if(serialPortEvent.isRXCHAR()){
                     try {
                         byte[] buffer = serialPort.readBytes();
-                        String[] serialMsg = new String[buffer.length];
+                        String serialMsg = new String(buffer, StandardCharsets.UTF_8);
                         
-                        for(int i=0;i<buffer.length;i++){
-                            serialMsg[i]=String.valueOf(buffer[i]&0xff);
-                        }
-                        msgSerial.setText(Arrays.toString(buffer));
-                        System.out.println(Arrays.toString(buffer));
+                        msgSerial.setText(serialMsg);
+                        //System.out.println(Arrays.toString(buffer));
+                        System.out.println(serialMsg);
                         
                     } catch (SerialPortException e) {
                         e.printStackTrace();
                     }
                 }
             });
+
+            //cast port
+            port = serialPort;
         }catch (Exception e){
             System.out.println("Error at serial Connect");
             e.printStackTrace();
+        }
+    }
+    public void serialDisconnect(){
+        System.out.println("Disconnect Serial port");
+        if(port!=null){
+            try {
+                port.removeEventListener();
+
+                if(port.isOpened())
+                    port.closePort();
+                
+            } catch (SerialPortException e) {
+                System.out.println("Error in disconnect");
+                e.printStackTrace();
+            }
         }
     }
 }
